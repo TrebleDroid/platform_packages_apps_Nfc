@@ -572,7 +572,11 @@ public class NfcService implements DeviceHostListener, ForegroundUtils.Callback 
         mActivityManager = mContext.getSystemService(ActivityManager.class);
         mVibrator = mContext.getSystemService(Vibrator.class);
         mVibrationEffect = VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE);
-        mVrManager = mContext.getSystemService(VrManager.class);
+        try {
+            mVrManager = mContext.getSystemService(VrManager.class);
+        } catch(Throwable t) {
+            mVrManager = null;
+        }
 
         mScreenState = mScreenStateHelper.checkScreenState();
 
